@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:termflow/pages/home/home_screen.dart';
 
 // 1. Senin hazırladığın tema dosyasını (Renkler + Fontlar) çağırıyoruz
 import 'core/theme/app_theme.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
 
       // Başlangıç rotası (Splash ekranı)
-      home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }
