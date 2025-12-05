@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 // 1. Senin hazırladığın tema dosyasını (Renkler + Fontlar) çağırıyoruz
 import 'core/theme/app_theme.dart';
 

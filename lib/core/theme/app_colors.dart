@@ -27,7 +27,7 @@ class AppColors {
 
   /// Koyu Yazı (Dark Text)
   /// Kullanım: "Welcome back", "Create Account" gibi ana başlıklar.
-  static const Color darkText = Color(0xFF384250);
+  static const Color darkText = Color.fromARGB(255, 0, 0, 0);
 
   /// Açık Yazı (Light/Grey Text)
   /// Kullanım: Alt açıklamalar, "Please sign up to continue" gibi yazılar.
@@ -51,4 +51,7 @@ class AppColors {
   
   /// Sayfa Arkaplanı (Beyaz)
   static const Color background = Colors.white;
+
+  /// kart arkaplan
+  static const Color cardBackground = Color.fromARGB(104, 231, 228, 228);
 }
