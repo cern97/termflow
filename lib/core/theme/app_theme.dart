@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // 1. Paketi içeri aldık
+// import 'package:google_fonts/google_fonts.dart'; // <<< Google Fonts İÇERİ ALIMI KALDIRILDI
 import 'app_colors.dart';
 
 class AppTheme {
@@ -9,16 +9,26 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
 
-      // 1. ARKA PLAN RENGİ (Duvarlar)
+      // 🥇 1. YEREL FONT TANIMLAMASI (fontFamily): 
+      // pubspec.yaml'de tanımladığınız 'Poppins' ismini buraya yazarak 
+      // tüm uygulamayı internetten bağımsız hale getiriyoruz.
+      fontFamily: 'Poppins', 
+
+      // 2. ARKA PLAN RENGİ (Duvarlar)
       scaffoldBackgroundColor: AppColors.background,
 
-      // 2. ANA RENK TANIMI (Opsiyonel ama iyidir)
-      // Bazı widget'lar (loading çubuğu vs.) otomatik bu rengi alır.
+      // 3. ANA RENK TANIMI
       primaryColor: AppColors.primaryOrange,
 
-      // 3. YAZI TİPİ (FONT) AYARI - İŞTE SİHİR BURADA ✨
-      // Uygulamadaki TÜM yazılar artık "Poppins" fontuyla yazılacak.
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      // 4. TEXTTHEME: 
+      // GoogleFonts.poppinsTextTheme() çağrısı yerine boş bırakıyoruz.
+      // Tüm Text widget'ları otomatik olarak yukarıdaki 'fontFamily: Poppins' ayarını miras alacaktır.
+      // Eğer özel stilleriniz varsa (başlık, gövde vb.), onları burada tanımlayabilirsiniz:
+      // textTheme: const TextTheme(
+      //   titleLarge: TextStyle(fontWeight: FontWeight.bold),
+      //   bodyMedium: TextStyle(fontSize: 14),
+      // ),
+      
     );
   }
 }
