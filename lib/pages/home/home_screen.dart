@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:termflow/core/theme/app_colors.dart'; 
 import '../../widgets/navbar.dart'; // Navigasyon çubuğu widget'ını import ediyoruz
 import '../library/library_page.dart'; // Library sayfanızı import ediyoruz
-import '../profile/profile_page.dart'; // Profile sayfanızı import ediyoruz
+import '../profile/profile_screen.dart'; // Profile sayfanızı import ediyoruz
 
 
 class HomeScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // sınıfın kendisini değil (Sonsuz döngüyü önler).
       _buildHomePageContent(), // Index 0: Home sayfasının detaylı içeriği
       const LibraryScreen(),    // Index 1: Library sayfası
-      const ProfilePage(),      // Index 2: Profile sayfası
+      const ProfileScreen(),      // Index 2: Profile sayfası
     ];
   }
 
