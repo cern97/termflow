@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:termflow/pages/onboarding/splash_page.dart';
+
+
 
 // 1. Senin hazırladığın tema dosyasını (Renkler + Fontlar) çağırıyoruz
 import 'core/theme/app_theme.dart';
 
 // 2. Geçici oluşturduğumuz Splash (Açılış) ekranını çağırıyoruz
-import 'package:termflow/pages/onboarding/splash_page.dart';
+
 
 void main() {
   runApp(const MyApp());
