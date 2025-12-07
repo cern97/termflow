@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:termflow/core/theme/app_colors.dart';
+import 'package:termflow/pages/profile/knows_terms.dart';
+import 'package:termflow/pages/profile/unkowns_terms.dart';
 
-// SINIF İSMİNİ "ProfileScreen" OLARAK GÜNCELLEDİM
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -12,7 +14,6 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Profile",
-          // Yerel Poppins fontunu kullanıyoruz
           style: TextStyle(
             fontFamily: 'Poppins', 
             fontWeight: FontWeight.bold, 
@@ -22,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false, // Geri butonunu kaldırdık
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -97,48 +98,70 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // 5. MENÜLER
+              // 5. MENÜLER (Tıklanabilir)
               _buildMenuOption(
+                context: context,
                 icon: Icons.check_circle_outline,
                 iconColor: AppColors.primaryOrange,
                 title: "Known Terminology",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const KnownTermsPage()),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               _buildMenuOption(
+                context: context,
                 icon: Icons.help_outline,
-                 iconColor: AppColors.primaryOrange,
+                iconColor: AppColors.primaryOrange,
                 title: "Unknown Terminology",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const UnknownTermsPage()),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               _buildMenuOption(
+                context: context,
                 icon: Icons.settings_outlined,
                 iconColor: Colors.grey,
                 title: "Settings",
+                onTap: () {
+                  // Settings sayfası buraya eklenebilir
+                },
               ),
 
               const SizedBox(height: 30),
 
               // 6. ÇIKIŞ BUTONU
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                   color: AppColors.cardBackground,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Center(
-                  child: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                  // Çıkış işlemi buraya
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardBackground,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Log Out",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
               ),
-              // Navbar'ın altında kalmaması için boşluk
               const SizedBox(height: 100), 
             ],
           ),
@@ -152,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
       decoration: BoxDecoration(
-         color: AppColors.cardBackground,
+        color: AppColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -171,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
             label,
             style: const TextStyle(
               fontFamily: 'Poppins',
-              color:AppColors.lightText, 
+              color: AppColors.lightText, 
               fontSize: 14
             ),
           ),
@@ -181,39 +204,44 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildMenuOption({
+    required BuildContext context,
     required IconData icon,
     required Color iconColor,
     required String title,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.2),
-              shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: iconColor),
             ),
-            child: Icon(icon, color: iconColor),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-          ),
-          const Icon(Icons.chevron_right, color: Colors.grey),
-        ],
+            const Icon(Icons.chevron_right, color: Colors.grey),
+          ],
+        ),
       ),
     );
   }
