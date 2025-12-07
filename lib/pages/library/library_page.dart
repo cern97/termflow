@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// Kendi tema dosyanızı import ettiğinizi varsayıyorum
-import 'package:termflow/core/theme/app_colors.dart'; 
+import 'package:termflow/core/theme/app_colors.dart'; // Tema dosyan
+import 'flashcard_view.dart'; // Flashcard sayfasını tanıması için
+import 'flashcard_data.dart'; // Verileri (flashcardsData) tanıması için BURASI ÇOK ÖNEMLİ
 
 // =========================================================
 // BÖLÜM 1: VERİ YAPISI VE ÖRNEK VERİLER (Model)
@@ -23,9 +24,8 @@ final List<LibraryItem> libraryItems = [
   LibraryItem(title: 'SQL', termCount: 45, icon: Icons.dns),
 ];
 
-
 // =========================================================
-// BÖLÜM 2: ANA EKRAN WIDGET'I (ListView.builder Mekanizması) - GÜNCELLENMİŞ
+// BÖLÜM 2: ANA EKRAN WIDGET'I
 // =========================================================
 
 class LibraryScreen extends StatelessWidget {
@@ -35,39 +35,31 @@ class LibraryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      // AppBar: Başlık Çubuğu - Hizalama ve Kalınlık İçin Düzenlendi
+      // AppBar Ayarları
       appBar: AppBar(
-        // 1. leadingWidth: 0 ve leading: SizedBox.shrink() ile 
-        //    başlığın soldan boşluğu (genellikle 20 birim) sıfırlanır.
         leadingWidth: 0, 
         leading: const SizedBox.shrink(), 
-
-        // 2. Başlık (title) widget'ına soldan 25 birim boşluk veriyoruz
         title: Padding(
-          padding: const EdgeInsets.fromLTRB(20.0, 40, 20.0, 25.0),  // 25 birim soldan boşluk
-          child: Text(
+          padding: const EdgeInsets.fromLTRB(20.0, 40, 20.0, 25.0),
+          child: const Text(
             'Library',
             style: TextStyle(
               fontFamily: 'Poppins',
               color: Colors.black, 
-              fontWeight: FontWeight.w900, // ÇOK DAHA KALIN YAPILDI
+              fontWeight: FontWeight.w900, 
               fontSize: 33, 
             ),
           ),
         ),
-        
         backgroundColor: Colors.transparent, 
         elevation: 0, 
-        toolbarHeight: 70, // Başlık altı boşluğunu artırmak için
+        toolbarHeight: 70, 
       ),
 
-      // Body: Liste İçeriği - Hizalama İçin Padding Güncellendi
+      // Liste İçeriği
       body: SafeArea(
         child: ListView.builder(
-          // 25 birimlik hizalama ve genel padding'i doğrudan ListView'a veriyoruz.
-          // fromLTRB: Sol (25), Üst (0), Sağ (25), Alt (25)
           padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 25.0), 
-
           itemCount: libraryItems.length,
           itemBuilder: (context, index) {
             final item = libraryItems[index]; 
@@ -79,17 +71,15 @@ class LibraryScreen extends StatelessWidget {
   }
 }
 
-
 // =========================================================
-// BÖLÜM 3: TEKRAR KULLANILABİLİR LİSTE ÖĞESİ (Kart Tasarımı)
+// BÖLÜM 3: TEKRAR KULLANILABİLİR LİSTE ÖĞESİ
 // =========================================================
 
 Widget _buildListItem(BuildContext context, LibraryItem item) {
-  // Liste öğeleri (kartlar) zaten ListView.builder'ın padding'i içinde hizalanacak.
   return Padding(
     padding: const EdgeInsets.only(bottom: 7),
     child: Card(
-      color:AppColors.cardBackground,
+      color: AppColors.cardBackground,
       elevation: 0, 
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -97,7 +87,7 @@ Widget _buildListItem(BuildContext context, LibraryItem item) {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         
-        // 1. Sol Kısım (leading): İkon ve Container
+        // 1. Sol Kısım (İkon)
         leading: Container(
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
@@ -111,7 +101,7 @@ Widget _buildListItem(BuildContext context, LibraryItem item) {
           ),
         ),
         
-        // 2. Orta Kısım: Başlık ve Terim Sayısı
+        // 2. Orta Kısım (Başlık)
         title: Text(
           item.title,
           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -121,17 +111,27 @@ Widget _buildListItem(BuildContext context, LibraryItem item) {
           style: const TextStyle(color: AppColors.lightText),
         ),
         
-        // 3. Sağ Kısım: İleri Ok Simgesi
+        // 3. Sağ Kısım (Ok)
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: Colors.grey,
           size: 16,
         ),
         
-        // 4. Tıklama İşlemi
-        onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${item.title} sayfasına gidiliyor...')),
+        // --- DÜZELTİLEN KISIM BURASI ---
+       // library_page.dart dosyasındaki onTap kısmı:
+       onTap: () {
+          List<Flashcard> selectedCards = flashcardsData[item.title] ?? [];
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              // BURAYI DOLDURMAN LAZIM:
+              builder: (context) => FlashcardView(
+                topicName: item.title,      
+                flashcards: selectedCards,  
+              ),
+            ),
           );
         },
       ),
