@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:termflow/pages/onboarding/splash_page.dart';
+import 'package:termflow/pages/onboarding/splash_screen.dart';
 
 
 

@@ -39,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
               
               // 2. İSİM VE MAİL
               const Text(
-                "Alex Developer",
+                "XYZ Developer",
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 22, 
@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const Text(
-                "alex.dev@example.com",
+                "xyz.dev@example.com",
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   color: AppColors.lightText, 
