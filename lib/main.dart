@@ -33,6 +33,11 @@ class MyApp extends StatelessWidget {
 
       // Başlangıç rotası (Splash ekranı)
       home: const SplashScreen(),
+      //const Scaffold(
+  //body: Center(
+    //child: Text("Uygulama Çalışıyor!", style: TextStyle(fontSize: 30, color: Colors.black)),
+  //),
+   //)
     );
   }
 }
